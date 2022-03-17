@@ -9,20 +9,20 @@ namespace DAL
 {
     public class ForecastRepository
     {
-        private IDbConnection GetConnection(string password)
+        private IDbConnection GetConnection()
         {
-            return new SqlConnection($"Server=tcp:devops-22.database.windows.net,1433;Initial Catalog=WeatherForecast;Persist Security Info=False;User ID=boulund;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            return new SqlConnection($"Server=localhost,1433;Initial Catalog=WeatherForecast;User ID=sa;Password=yourStrongP@ssword;MultipleActiveResultSets=True;");
         }
         
-        public IEnumerable<WeatherForecast> GetForecasts(string password)
+        public IEnumerable<WeatherForecast> GetForecasts()
         {
-            var connection = GetConnection(password);
+            var connection = GetConnection();
             return connection.Query<WeatherForecast>("SELECT Id, [Date], TemperatureC, Summary FROM Forecasts");
         }
 
-        public void SaveForecast(string password, WeatherForecast forecast)
+        public void SaveForecast(WeatherForecast forecast)
         {
-            var connection = GetConnection(password);
+            var connection = GetConnection();
             if (forecast.Id == 0)
             {
                 connection.Execute(
@@ -35,9 +35,9 @@ namespace DAL
             }
         }
 
-        public void DeleteForecast(string password, int id)
+        public void DeleteForecast(int id)
         {
-            var connecton = GetConnection(password);
+            var connecton = GetConnection();
             connecton.Execute("DELETE FROM Forecasts WHERE Id = @Id", new { Id = id });
         }
     }

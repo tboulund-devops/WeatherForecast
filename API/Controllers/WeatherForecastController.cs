@@ -17,21 +17,21 @@ namespace API.Controllers
         private ForecastManager _forecastManager = new ForecastManager();
         
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get(string databasePassword)
+        public IEnumerable<WeatherForecast> Get()
         {
-            return _forecastManager.GetForecasts(databasePassword);
+            return _forecastManager.GetForecasts();
         }
 
         [HttpPost]
         public void Post([FromBody]PostForecastModel model)
         {
-            _forecastManager.SaveForecast(model.DatabasePassword, new WeatherForecast { Summary = model.Summary, TemperatureC = model.TemperatureC});
+            _forecastManager.SaveForecast(new WeatherForecast { Summary = model.Summary, TemperatureC = model.TemperatureC});
         }
 
         [HttpDelete]
         public void Delete([FromBody]DeleteForecastModel model)
         {
-            _forecastManager.DeleteForecast(model.DatabasePassword, model.Id);
+            _forecastManager.DeleteForecast(model.Id);
         }
     }
 }

@@ -9,19 +9,19 @@ namespace BLL
     {
         private ForecastRepository _forecastRepository = new ForecastRepository();
 
-        public IEnumerable<WeatherForecast> GetForecasts(string password)
+        public IEnumerable<WeatherForecast> GetForecasts()
         {
-            return _forecastRepository.GetForecasts(password);
+            return _forecastRepository.GetForecasts();
         }
 
-        public void SaveForecast(string password, WeatherForecast forecast)
+        public void SaveForecast(WeatherForecast forecast)
         {
-            _forecastRepository.SaveForecast(password, forecast);
+            _forecastRepository.SaveForecast(forecast);
         }
 
-        public void DeleteForecast(string password, int id)
+        public void DeleteForecast(int id)
         {
-            _forecastRepository.DeleteForecast(password, id);
+            _forecastRepository.DeleteForecast(id);
         }
     }
 }
