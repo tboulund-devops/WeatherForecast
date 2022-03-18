@@ -45,7 +45,7 @@ pipeline{
                 }
                 stage("Database") {
                     steps {
-                        sh "docker run --name weather-db-container -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrongP@ssword' -p 8092:1433 -d mcr.microsoft.com/mssql/server:"
+                        sh "docker run --name weather-db-container -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrongP@ssword' -p 8092:1433 -d mcr.microsoft.com/mssql/server"
                     }
                 }
             }
