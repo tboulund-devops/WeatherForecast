@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Build frontend") {
             when {
-                changeset "Web"
+                changeset "Web/**"
             }
             steps {
                 sh "docker-compose build web"
@@ -12,9 +12,9 @@ pipeline{
         stage("Build API"){
             when {
                 anyOf {
-                    changeset "API"
-                    changeset "BLL"
-                    changeset "DAL"
+                    changeset "API/**"
+                    changeset "BLL/**"
+                    changeset "DAL/**"
                 }
             }
             steps {
