@@ -1,7 +1,10 @@
 pipeline{
     agent any
     stages{
-        stage("Build API"){
+        stage("Build API") {
+            when {
+                changeset "API/**"
+            }
             steps{
                 dir("API") {
                     sh "dotnet build --configuration Release"
