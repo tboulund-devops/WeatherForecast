@@ -19,7 +19,7 @@ pipeline{
         }
         stage("Unit Tests") {
             steps {
-                // ...
+                echo "Here we'll run unit tests later"
             }
         }
         stage("Deploy") {
