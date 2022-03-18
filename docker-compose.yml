@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: "Web"
+    container_name: "weather-web-container"
+    ports:
+      - "8090:80"
+  api:
+    build:
+      context: "API"
+    container_name: "weather-api-container"
+    ports:
+      - "8091:80"
+    depends_on:
+      - "database"
+  database:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: "weather-db-container"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=yourStrongP@ssword
+    ports:
+      - "8092:1433"
