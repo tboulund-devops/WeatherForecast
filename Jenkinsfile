@@ -17,9 +17,7 @@ pipeline{
             steps {
                 script {
                     try {
-                        sh "docker rm -f weather-web-container"
-                        sh "docker rm -f weather-api-container"
-                        sh "docker rm -f weather-db-container"
+                        sh "docker compose down"
                     }
                     finally { }
                 }
