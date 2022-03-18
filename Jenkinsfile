@@ -3,7 +3,11 @@ pipeline{
     stages{
         stage("Build API") {
             when {
-                changeset "API/**"
+                anyOf {
+                    changeset "API/**"
+                    changeset "BLL/**"
+                    changeset "DAL/**"
+                }
             }
             steps{
                 dir("API") {
