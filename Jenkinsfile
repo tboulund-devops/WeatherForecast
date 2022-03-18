@@ -35,7 +35,7 @@ pipeline{
                 }
                 stage("Database") {
                     steps {
-                        sh "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrongP@ssword' -p 8092:1433 -d mcr.microsoft.com/mssql/server:2019"
+                        sh "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrongP@ssword' -p 8092:1433 -d mcr.microsoft.com/mssql/server"
                     }
                 }
             }
