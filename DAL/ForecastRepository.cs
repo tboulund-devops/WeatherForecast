@@ -11,7 +11,7 @@ namespace DAL
     {
         private IDbConnection GetConnection()
         {
-            return new SqlConnection($"Server=devops.setgo.dk,8092;Initial Catalog=WeatherForecast;User ID=sa;Password=yourStrongP@ssword;MultipleActiveResultSets=True;");
+            return new SqlConnection($"Server=weather-db-container,1433;Initial Catalog=WeatherForecast;User ID=sa;Password=yourStrongP@ssword;MultipleActiveResultSets=True;");
         }
         
         public IEnumerable<WeatherForecast> GetForecasts()
