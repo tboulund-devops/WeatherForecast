@@ -1,7 +1,7 @@
 var ViewModel = function ViewModel() {
     
     var me = this;
-    me.api = "https://devops.setgo.dk:8091/WeatherForecast";
+    me.api = "http://devops.setgo.dk:8091/WeatherForecast";
     me.forecasts = ko.observableArray();
     me.temperatureC = ko.observable();
     me.summary = ko.observable();
