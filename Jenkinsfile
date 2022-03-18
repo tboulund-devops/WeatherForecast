@@ -17,41 +17,15 @@ pipeline{
             steps {
                 script {
                     try {
-                        sh "docker compose down"
+                        sh "docker-compose down"
                     }
                     finally { }
                 }
             }
         }
         stage("Deploy") {
-            parallel {
-                stage("Frontend") {
-                    when {
-                        changeset "Web"
-                    }
-                    steps {
-                        dir("Web") {
-                            sh "docker build -t weather-web ."
-                            sh "docker run --name weather-web-container -d -p 8090:80 weather-web"
-                        }
-                    }
-                }
-                stage("API") {
-                    when {
-                        changeset "API"
-                    }
-                    steps {
-                        dir("API") {
-                            sh "docker build -t weather-api ."
-                            sh "docker run --name weather-api-container -d -p 8091:80 weather-api"
-                        }
-                    }
-                }
-                stage("Database") {
-                    steps {
-                        sh "docker run --name weather-db-container -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrongP@ssword' -p 8092:1433 -d mcr.microsoft.com/mssql/server"
-                    }
-                }
+            steps {
+                sh "docker-compose up --build"
             }
         }
     }
