@@ -28,6 +28,9 @@ pipeline{
         stage("Deploy") {
             parallel {
                 stage("Frontend") {
+                    when {
+                        changeset "Web"
+                    }
                     steps {
                         dir("Web") {
                             sh "docker build -t weather-web ."
@@ -36,6 +39,9 @@ pipeline{
                     }
                 }
                 stage("API") {
+                    when {
+                        changeset "API"
+                    }
                     steps {
                         dir("API") {
                             sh "docker build -t weather-api ."
