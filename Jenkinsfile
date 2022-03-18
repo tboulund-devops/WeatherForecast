@@ -1,10 +1,26 @@
 pipeline{
     agent any
     stages{
+        stage("Build frontend") {
+            when {
+                changeset "Web"
+            }
+            steps {
+                sh "docker-compose build web"
+            }
+        }
         stage("Build API"){
-            steps{
+            when {
+                anyOf {
+                    changeset "API"
+                    changeset "BLL"
+                    changeset "DAL"
+                }
+            }
+            steps {
                 dir("API") {
                     sh "dotnet build --configuration Release"
+                    sh "docker-compose build api"
                 }
             }
         }
@@ -25,7 +41,7 @@ pipeline{
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose up --build -d"
+                sh "docker-compose up -d"
             }
         }
     }
