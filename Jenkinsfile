@@ -29,7 +29,7 @@ pipeline{
                         dir("API") {
                             sh "docker build -t weather-api ."
                             sh "docker rm -f weather-api-container"
-                            sh "docker run --name weather-web-container -d -p 8091:80 weather-api"
+                            sh "docker run --name weather-api-container -d -p 8091:80 weather-api"
                         }
                     }
                 }
