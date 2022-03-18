@@ -4,7 +4,7 @@ pipeline{
         stage("Build API"){
             steps{
                 dir("API") {
-                    sh "dotnet build"
+                    sh "dotnet build --configuration Release"
                 }
             }
         }
