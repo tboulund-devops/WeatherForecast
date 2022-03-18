@@ -23,3 +23,8 @@ services:
       - SA_PASSWORD=yourStrongP@ssword
     ports:
       - "8092:1433"
+    volumes:
+      - weatherData:/var/opt/mssql:rw
+
+volumes:
+  weatherData:
