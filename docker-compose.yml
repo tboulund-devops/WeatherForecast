@@ -27,4 +27,4 @@ services:
       - weatherData:/var/opt/mssql:rw
 
 volumes:
-  weatherData
+  weatherData:
