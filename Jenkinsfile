@@ -12,6 +12,17 @@ pipeline{
             steps{
                 dir("API") {
                     sh "dotnet build --configuration Release"
+                    sh "docker-compose build api"
+                }
+            }
+        }
+        stage("Build frontend") {
+            when {
+                changeset "Web/**"
+            }
+            steps {
+                dir("Web") {
+                    sh "docker-compose build web"
                 }
             }
         }
@@ -32,7 +43,7 @@ pipeline{
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose up -d --build"
+                sh "docker-compose up -d"
             }
         }
     }
