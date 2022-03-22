@@ -43,8 +43,12 @@ pipeline{
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose push"
                 sh "docker-compose up -d"
+            }
+        }
+        stage("Push to registry") {
+            steps {
+                sh "docker-compose push"
             }
         }
     }
