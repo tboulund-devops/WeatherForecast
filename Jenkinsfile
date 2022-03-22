@@ -12,7 +12,7 @@ pipeline{
             steps{
                 dir("API") {
                     sh "dotnet build --configuration Release"
-                    sh "docker-compose --env-file .env.dev build api"
+                    sh "docker-compose --env-file config/Test.env build api"
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline{
             }
             steps {
                 dir("Web") {
-                    sh "docker-compose --env-file .env.dev build web"
+                    sh "docker-compose --env-file config/Test.env build web"
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline{
             steps {
                 script {
                     try {
-                        sh "docker-compose --env-file .env.dev down"
+                        sh "docker-compose --env-file config/Test.dev down"
                     }
                     finally { }
                 }
@@ -43,12 +43,12 @@ pipeline{
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose --env-file .env.dev up -d"
+                sh "docker-compose --env-file config/Test.env up -d"
             }
         }
         stage("Push to registry") {
             steps {
-                sh "docker-compose --env-file .env.dev push"
+                sh "docker-compose --env-file config/Test.env push"
             }
         }
     }
