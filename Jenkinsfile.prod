@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    parameters {
+        run filter: 'SUCCESSFUL', name: 'DEPLOY_NUMBER', projectName: 'WeatherForecast'
+    }
+    stages {
+        stage("Deploy to production") {
+            steps {
+                sh "docker-compose -f docker-compose.yml -f docker-compose.yml up -d"
+            }
+        }
+    }
+}

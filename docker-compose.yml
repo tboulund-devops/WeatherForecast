@@ -4,27 +4,27 @@ services:
   web:
     build:
       context: "Web"
-    image: "localhost:7002/weather-web:${BUILD_NUMBER}"
-    container_name: "weather-web-container"
+    image: "localhost:7002/weather-web:${IMAGE_TAG}"
+    container_name: "${WEB_CONT_NAME}"
     ports:
-      - "8090:80"
+      - "${WEB_PORT}:80"
   api:
     build:
       context: "API"
-    image: "localhost:7002/weather-api:${BUILD_NUMBER}"
-    container_name: "weather-api-container"
+    image: "localhost:7002/weather-api:${IMAGE_TAG}"
+    container_name: "${API_CONT_NAME}"
     ports:
-      - "8091:80"
+      - "${API_PORT}:80"
     depends_on:
       - "db"
   db:
     image: "mcr.microsoft.com/mssql/server"
-    container_name: "weather-db-container"
+    container_name: "${DB_CONT_NAME}"
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=yourStrongP@ssword
     ports:
-      - "8092:1433"
+      - "${DB_PORT}:1433"
     volumes:
       - weatherData:/var/opt/mssql:rw
 
