@@ -4,12 +4,14 @@ services:
   web:
     build:
       context: "Web"
+    image: "devops.setgo.dk:7002/weather-web:${BUILD_NUMBER}"
     container_name: "weather-web-container"
     ports:
       - "8090:80"
   api:
     build:
       context: "API"
+    image: "devops.setgo.dk:7002/weather-api:${BUILD_NUMBER}"
     container_name: "weather-api-container"
     ports:
       - "8091:80"
