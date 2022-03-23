@@ -21,6 +21,7 @@ var ViewModel = function ViewModel() {
         url: "/config/api-url.txt",
         type: "GET",
         success: function(url) {
+            console.log(url);
             me.api(url);
             me.loadData();
         }
