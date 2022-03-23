@@ -8,6 +8,9 @@ services:
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
+    environment:
+      - API_URL=${API_URL}
+    command: echo "${API_URL}" > /usr/share/nginx/html/config/api-url
   api:
     build:
       context: "API"
