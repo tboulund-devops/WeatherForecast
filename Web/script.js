@@ -1,7 +1,7 @@
 var ViewModel = function ViewModel() {
     
     var me = this;
-    me.api = "http://devops.setgo.dk:8091/WeatherForecast";
+    me.api = ko.observable();
     me.forecasts = ko.observableArray();
     me.temperatureC = ko.observable();
     me.summary = ko.observable();
@@ -16,8 +16,15 @@ var ViewModel = function ViewModel() {
             }
         });
     }
-    
-    me.loadData();
+
+    $.ajax({
+        url: "/config/api-url.txt",
+        type: "GET",
+        success: function(url) {
+            me.api(url);
+            me.loadData();
+        }
+    });
     
     me.save = function() {
         $.ajax({
