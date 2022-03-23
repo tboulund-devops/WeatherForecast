@@ -8,7 +8,7 @@ var ViewModel = function ViewModel() {
 
     me.loadData = function() {
         $.ajax({
-            url: me.api,
+            url: me.api(),
             type: "GET",
             success: function(a) {
                 me.forecasts.removeAll();
@@ -29,7 +29,7 @@ var ViewModel = function ViewModel() {
     
     me.save = function() {
         $.ajax({
-            url: me.api,
+            url: me.api(),
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
@@ -45,7 +45,7 @@ var ViewModel = function ViewModel() {
     me.delete = function(forecast) {
         if(confirm("Are you sure you want to delete the forecast?")) {
             $.ajax({
-                url: me.api,
+                url: me.api(),
                 type: "DELETE",
                 contentType: "application/json",
                 data: JSON.stringify({
