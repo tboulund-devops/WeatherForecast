@@ -12,8 +12,8 @@ pipeline{
             steps{
                 dir("API") {
                     sh "dotnet build --configuration Release"
-                    sh "docker-compose --env-file config/Test.env build api"
                 }
+                sh "docker-compose --env-file config/Test.env build api"
             }
         }
         stage("Build frontend") {
@@ -21,9 +21,7 @@ pipeline{
                 changeset "Web/**"
             }
             steps {
-                dir("Web") {
-                    sh "docker-compose --env-file config/Test.env build web"
-                }
+                sh "docker-compose --env-file config/Test.env build web"
             }
         }
         stage("Unit Tests") {
