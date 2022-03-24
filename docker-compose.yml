@@ -4,14 +4,14 @@ services:
   web:
     build:
       context: "Web"
-    image: "localhost:7002/weather-web"
+    image: "localhost:7002/weather-web:${IMAGE_TAG}"
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
   api:
     build:
       context: "API"
-    image: "localhost:7002/weather-api"
+    image: "localhost:7002/weather-api:${IMAGE_TAG}"
     container_name: "${API_CONT_NAME}"
     ports:
       - "${API_PORT}:80"
